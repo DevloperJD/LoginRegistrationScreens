@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">LoginregisterScreen</string>
+    <string name="login">LOGIN</string>
+    <string name="password_hint">Password</string>
+    <string name="user_name_hint">Email</string>
+    <string name="image_content_description">Logo</string>
+    <string name="terms_and_conditions"><![CDATA[Terms & Conditions]]></string>
+    <string name="ForgotPassword">Forgot Password?</string>
+
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_thin">sans-serif-thin</string>
+    <string name="roboto_medium">sans-serif-medium</string>
+</resources>
