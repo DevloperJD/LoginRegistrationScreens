@@ -2,4 +2,8 @@
 <resources>
     <dimen name="btn_login_margin_bottom">14dp</dimen>
     <dimen name="activity_padding_horizontal">20dp</dimen>
+    <dimen name="logo_dimension">150dp</dimen>
+    <dimen name="clear_dimension">30dp</dimen>
+    <dimen name="logo_top_margin">40dp</dimen>
+    <dimen name="padding_ten">10dp</dimen>
 </resources>

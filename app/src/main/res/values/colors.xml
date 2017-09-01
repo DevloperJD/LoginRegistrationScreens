@@ -6,4 +6,5 @@
     <color name="text_white">#FFFF</color>
     <color name="background_login">#293B72</color>
     <color name="newColor">#FF4081</color>
+    <color name="background_register">#FF2E7A</color>
 </resources>

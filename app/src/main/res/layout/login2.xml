@@ -27,12 +27,12 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@string/roboto_thin"
+            android:letterSpacing="0.1"
             android:text="@string/login"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:layout_marginBottom="20dp"
-            android:letterSpacing="0.1"
-            android:fontFamily="@string/roboto_thin"
             android:textStyle="bold" />
 
 
@@ -48,6 +48,7 @@
                 android:id="@+id/input_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/white"
                 android:fontFamily="@string/roboto_light"
                 android:hint="@string/user_name_hint"
                 android:inputType="textEmailAddress"
@@ -62,33 +63,37 @@
             android:textColorHint="@color/text_white">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/loginScreen_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Password"
+                android:backgroundTint="@android:color/white"
                 android:fontFamily="@string/roboto_light"
+                android:hint="Password"
+                android:drawableRight="@drawable/ic_visibility_white_24dp"
                 android:inputType="textPassword"
-                android:textColor="@color/text_white" />
+                android:textColor="@color/text_white"
+                />
         </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/forgot_password"
             android:layout_width="match_parent"
-            android:gravity="right"
             android:layout_height="wrap_content"
+            android:gravity="right"
             android:text="@string/ForgotPassword"
             android:textColor="@color/text_white" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
             android:layout_height="35dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/btn_login_margin_bottom"
             android:layout_marginTop="30dp"
             android:background="@drawable/bg_btn_login"
             android:foreground="?attr/selectableItemBackground"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
             android:text="@string/login"
             android:textColor="@color/text_white" />
     </LinearLayout>
@@ -97,6 +102,7 @@
         android:id="@+id/fab2"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:transitionName="fab"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="57dp"

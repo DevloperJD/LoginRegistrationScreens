@@ -10,4 +10,9 @@
     <string name="roboto_light">sans-serif-light</string>
     <string name="roboto_thin">sans-serif-thin</string>
     <string name="roboto_medium">sans-serif-medium</string>
+    <string name="register">REGISTER</string>
+    <string name="fullname">Full Name</string>
+    <string name="Firstname_hint">First Name</string>
+    <string name="LastName_hint">Last Name</string>
+    <string name="Create_Account">CREATE ACCOUNT</string>
 </resources>

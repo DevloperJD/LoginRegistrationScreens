@@ -1,94 +1,57 @@
 package com.example.droid5.login_register_screen;
 
+import android.animation.Animator;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Button;
+import android.widget.ImageView;
 
-public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = LoginActivity.class.getSimpleName();
-    Button login;
-    TextView termsAndConditions, forgetpassword;
-    EditText passwordField;
+
+public class RegistrationActivity extends AppCompatActivity {
+    private static final String TAG = RegistrationActivity.class.getSimpleName();
+    ImageView clear;
     boolean passwordVisible = false;
-    FloatingActionButton floatingActionButton;
+    EditText passwordField;
+    View layout;
+    int positionX, positionY;
+    float finalRadius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // making toolbar transparent
         transparentToolbar();
-
-        setContentView(R.layout.login2);
-
-
-        login = findViewById(R.id.button);
-        forgetpassword = findViewById(R.id.forgot_password);
-        termsAndConditions = findViewById(R.id.terms_conditions);
-        passwordField = findViewById(R.id.loginScreen_password);
-
+        setContentView(R.layout.registration);
+        clear = findViewById(R.id.clear);
         getSupportActionBar().hide();
-
-        floatingActionButton = findViewById(R.id.fab2);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int revealX = (int) (view.getX() + view.getWidth() / 2);
-                int revealY = (int) (view.getY() + view.getHeight() / 2);
-//
 
-//                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-//                intent.putExtra("positionX", revealX);
-//                intent.putExtra("positionY", revealY);
-//                startActivity(intent);
 
-                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
-                ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(LoginActivity.this, floatingActionButton, "fab");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    startActivity(intent, options.toBundle());
-                } else {
-                    startActivity(intent);
-                }
+                onBackPressed();
 
             }
         });
+        passwordField = findViewById(R.id.passwordfieldRegistration);
+        layout = findViewById(R.id.registerLayout);
 
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Login Button was Pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        forgetpassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Forget Password ?", Toast.LENGTH_SHORT).show();
-            }
-        });
-        termsAndConditions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginActivity.this, "Terms and Conditions was Pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //makeTransition();
+        }
 
         passwordField.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -100,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (passwordField.getRight() - passwordField.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                        Log.e(TAG, "on drawable right tap");
+
                         if (passwordVisible) {
                             passwordVisible = false;
                             passwordField.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -119,6 +82,30 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
+
+    private void makeTransition() {
+        ViewTreeObserver viewTreeObserver = layout.getViewTreeObserver();
+        if (viewTreeObserver.isAlive()) {
+            viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    final Intent intent = getIntent();
+                    positionX = intent.getIntExtra("positionX", 0);
+                    positionY = intent.getIntExtra("positionY", 0);
+                    finalRadius = (float) (Math.max(layout.getWidth(), layout.getHeight()) * 1.1);
+                    Animator animator = ViewAnimationUtils.createCircularReveal(layout, positionX, positionY, 0, finalRadius);
+                    animator.setDuration(400);
+                    layout.setVisibility(View.VISIBLE);
+                    animator.start();
+                    layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                }
+            });
+        } else layout.setVisibility(View.VISIBLE);
+
+
+    }
+
 
     private void transparentToolbar() {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
@@ -143,5 +130,4 @@ public class LoginActivity extends AppCompatActivity {
         }
         win.setAttributes(winParams);
     }
-
 }
